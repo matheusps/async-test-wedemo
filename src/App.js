@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import 'raw.css'
+
+import AsyncCounter from './components/AsyncCounter'
+import DataFetcher from './components/DataFetcher'
+import { Image, Container, Main } from './styles'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Main>
+      <Container>
+        <h1>Async Counter</h1>
+        <AsyncCounter />
+      </Container>
+
+      <Container>
+        <h1>Simple DataFetcher</h1>
+        <DataFetcher extractor="message" url="https://dog.ceo/api/breeds/image/random" />
+      </Container>
+
+      <Container>
+        <h1>Custom DataFetcher</h1>
+        <DataFetcher url="https://dog.ceo/api/breeds/image/random">
+          {({ data }) => (
+            <Image src={data.message} alt="random dog" />
+          )}
+        </DataFetcher>
+      </Container>
+    </Main>
   );
 }
 
